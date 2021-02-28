@@ -32,6 +32,7 @@
         <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
             <GroupBox Header="Network Interfaces">
                 <StackPanel>
+                    <Button Name="BtnRefresh" Click="BtnRefresh_Click" Content="Refresh" HorizontalAlignment="Left"/>
                     <DataGrid x:Name="DataGridAllInterface"
                               AutoGenerateColumns="False"
                               ItemsSource="{Binding ListRowVm}"

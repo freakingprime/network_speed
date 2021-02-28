@@ -110,5 +110,11 @@ namespace Network_Speed
                 }
             }
         }
+
+        private void BtnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            vm.DisplayNetworkList(vm.GetListInterface());
+            vm.ShowFullInformation(Properties.Settings.Default.MonitoredInterface);
+        }
     }
 }
