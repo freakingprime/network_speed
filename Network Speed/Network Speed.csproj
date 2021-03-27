@@ -130,4 +130,8 @@
     <PreBuildEvent>set mydate=%25date:~12,4%25%25date:~7,2%25%25date:~4,2%25
 echo %25mydate%25 &gt; "$(ProjectDir)\config\BuildTime.txt"</PreBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == Release xcopy "$(ProjectDir)bin\Release" "E:\SETUP\OTHERS 3\Network Speed\" /Y /I /E
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>
