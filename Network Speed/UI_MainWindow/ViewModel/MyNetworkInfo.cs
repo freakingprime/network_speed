@@ -21,6 +21,7 @@ namespace Network_Speed.UI_MainWindow.ViewModel
         {
             InterfaceName = string.Empty;
             SpeedStr = string.Empty;
+            Speed = 0;
             ConnectDuration = string.Empty;
         }
 
