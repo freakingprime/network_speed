@@ -60,6 +60,10 @@ namespace Network_Speed
                 vm.Loaded();
             }
             TxtMonitorInterface.Text = Properties.Settings.Default.MonitoredInterface;
+
+            //position
+            this.Top = Properties.Settings.Default.WindowTop;
+            this.Left = Properties.Settings.Default.WindowLeft;
         }
 
         private void TxtMonitorInterface_TextChanged(object sender, TextChangedEventArgs e)
@@ -115,6 +119,14 @@ namespace Network_Speed
         {
             vm.DisplayNetworkList(vm.GetListInterface());
             vm.ShowFullInformation(Properties.Settings.Default.MonitoredInterface);
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //save position
+            Properties.Settings.Default.WindowLeft = this.Left;
+            Properties.Settings.Default.WindowTop = this.Top;
+            Properties.Settings.Default.Save();
         }
     }
 }
