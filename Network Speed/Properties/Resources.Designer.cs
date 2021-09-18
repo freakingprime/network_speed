@@ -61,12 +61,21 @@ namespace Network_Speed.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 210205 
+        ///   Looks up a localized string similar to 210918 
         ///.
         /// </summary>
         internal static string BuildTime {
             get {
                 return ResourceManager.GetString("BuildTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Realtek PCIe GbE Family Controller.
+        /// </summary>
+        internal static string DEFAULT_INTERFACE {
+            get {
+                return ResourceManager.GetString("DEFAULT_INTERFACE", resourceCulture);
             }
         }
         

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Network_Speed.UI_MainWindow.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -16,6 +17,26 @@ namespace Network_Speed
         public App()
         {
 
+        }
+        private async void Application_Startup(object sender, StartupEventArgs e)
+        {
+            foreach (var item in e.Args)
+            {
+                if (item.Equals("/f") || item.Equals("/F"))
+                {
+                    bool ret = await MainWindowVm.ResetModemAtAllCost();
+                    if (ret)
+                    {
+                        Console.WriteLine("Reset successfully");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Failed to reset");
+                        _ = MessageBox.Show("Failed to reset modem.", "Fail", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    Current.Shutdown();
+                }
+            }
         }
     }
 }

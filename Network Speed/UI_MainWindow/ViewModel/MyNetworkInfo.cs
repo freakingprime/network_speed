@@ -27,7 +27,7 @@ namespace Network_Speed.UI_MainWindow.ViewModel
 
         public MyNetworkInfo(NetworkInterface a) : this()
         {
-            this.Adapter = a;
+            Adapter = a;
 
             InterfaceName = Adapter.Description.Trim();
             Speed = Adapter.Speed;
