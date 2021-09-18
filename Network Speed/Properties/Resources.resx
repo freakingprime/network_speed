@@ -121,6 +121,9 @@
   <data name="BuildTime" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\config\BuildTime.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="DEFAULT_INTERFACE" xml:space="preserve">
+    <value>Realtek PCIe GbE Family Controller</value>
+  </data>
   <data name="TITLE" xml:space="preserve">
     <value>Network Speed</value>
   </data>

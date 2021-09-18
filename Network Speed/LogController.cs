@@ -67,9 +67,9 @@ namespace Network_Speed
         private void PrintToTextbox(string s, string tag = "")
         {
             log.Debug("Textbox: " + s);
-            string message = DateTime.Now.ToString("HH:mm:ss") + tag + " - " + s + Environment.NewLine;
             if (myTextBox != null)
             {
+                string message = DateTime.Now.ToString("HH:mm:ss") + tag + " - " + s + Environment.NewLine;
                 if (!myTextBox.Dispatcher.CheckAccess())
                 {
                     myTextBox.Dispatcher.BeginInvoke(new Action(() => myTextBox.AppendText(message)));

@@ -10,7 +10,7 @@
         DataContextChanged="Window_DataContextChanged"
         Loaded="Window_Loaded"
         Closing="Window_Closing"
-        Title="MainWindow" Height="450" Width="450">
+        Title="MainWindow" Height="500" Width="450">
     <Window.DataContext>
         <vm:MainWindowVm/>
     </Window.DataContext>
@@ -33,7 +33,9 @@
         <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
             <GroupBox Header="Network Interfaces">
                 <StackPanel>
-                    <Button Name="BtnRefresh" Click="BtnRefresh_Click" Content="Refresh" HorizontalAlignment="Left"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Name="BtnRefresh" Click="BtnRefresh_Click" Content="Refresh"/>
+                    </StackPanel>
                     <DataGrid x:Name="DataGridAllInterface"
                               AutoGenerateColumns="False"
                               ItemsSource="{Binding ListRowVm}"
@@ -58,8 +60,7 @@
             <GroupBox Header="Monitor network">
                 <StackPanel>
                     <DockPanel>
-                        <Label Content="Saved name:"/>
-                        <Button x:Name="BtnReloadInformation" Content="Reload" Click="BtnReloadInformation_Click"/>
+                        <Button x:Name="BtnReloadInformation" Content="Default" Click="BtnReloadInformation_Click"/>
                         <TextBox Name="TxtMonitorInterface" 
                                  MaxLines="1"
                                  IsReadOnly="True"
@@ -92,11 +93,28 @@
                     </DockPanel>
                     <TextBox Name="TxtInfo"
                              Text="{Binding TxtFullInformation,UpdateSourceTrigger=PropertyChanged}"
+                             TextChanged="TxtInfo_TextChanged"
                              TextWrapping="Wrap"
                              IsReadOnly="True"
                              FontFamily="Courier New"
                              VerticalScrollBarVisibility="Visible"
-                             Height="150"/>
+                             Height="100"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Reset modem">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="BtnResetModem" Click="BtnResetModem_Click" Content="Reset Modem"/>
+                        <Button x:Name="BtnClearLog" Click="BtnClearLog_Click" Content="Clear Log"/>
+                        <Button x:Name="BtnTest" Click="BtnTest_Click" Content="Test"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="IP"/>
+                        <Label Content="Before: "/>
+                        <Label Name="TxtIPBefore" Content="{Binding TxtIPBefore}"/>
+                        <Label Content="After: "/>
+                        <Label Name="TxtIPAfter" Content="{Binding TxtIPAfter}" Foreground="{Binding ColorIPAfter}" FontWeight="Bold"/>
+                    </StackPanel>
                 </StackPanel>
             </GroupBox>
         </StackPanel>
