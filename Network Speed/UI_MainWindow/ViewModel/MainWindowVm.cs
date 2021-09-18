@@ -316,10 +316,25 @@ namespace Network_Speed.UI_MainWindow.ViewModel
             }
         }
 
-        public override void Loaded()
+        public override async void Loaded()
         {
             log.Debug("Window is loaded");
             DisplayNetworkList(GetListInterface());
+
+            var task = Task.Run(async () =>
+            {
+                string temp = "";
+                try
+                {
+                    temp = await GetIP();
+                }
+                catch
+                {
+                    log.Error("Cannot get IP");
+                }
+                return temp;
+            });
+            TxtIPBefore = await task;
         }
 
         public List<MyNetworkInfo> GetListInterface()
