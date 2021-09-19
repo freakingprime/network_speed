@@ -144,9 +144,13 @@ namespace Network_Speed.UI_MainWindow.ViewModel
             TxtIPAfter = EMPTY_STRING;
             ColorIPAfter = Brushes.Black;
 
+            oldLog.Debug("Get current IP...");
             try
             {
-                TxtIPBefore = GetIP();
+                TxtIPBefore = await Task.Run(() =>
+                {
+                    return GetIP();
+                });
             }
             catch (Exception e1)
             {
