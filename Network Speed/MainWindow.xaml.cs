@@ -117,8 +117,7 @@ namespace Network_Speed
 
         private void BtnRefresh_Click(object sender, RoutedEventArgs e)
         {
-            context.DisplayNetworkList(context.GetListInterface());
-            _ = context.ShowFullInformation(Properties.Settings.Default.MonitoredInterface);
+            context.ButtonRefresh();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

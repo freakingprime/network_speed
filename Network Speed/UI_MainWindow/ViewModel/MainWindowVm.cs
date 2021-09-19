@@ -26,6 +26,8 @@ namespace Network_Speed.UI_MainWindow.ViewModel
         public MainWindowVm()
         {
             ListRowVm = new ObservableCollection<MyNetworkInfo>();
+            TxtIPBefore = "";
+            TxtIPAfter = "";
         }
 
         #region Bind properties
@@ -89,6 +91,27 @@ namespace Network_Speed.UI_MainWindow.ViewModel
 
         }
 
+        public async void ButtonRefresh()
+        {
+            DisplayNetworkList(GetListInterface());
+            _ = ShowFullInformation(Properties.Settings.Default.MonitoredInterface);
+
+            TxtIPBefore = "";
+            TxtIPBefore = await Task.Run(() =>
+            {
+                string temp = "";
+                try
+                {
+                    temp = MainWindowVm.GetIP();
+                }
+                catch
+                {
+                    log.Error("Cannot get IP");
+                }
+                return temp;
+            });
+        }
+
         public static async Task<bool> ResetModemViaCommandLine()
         {
             bool result = false;
@@ -123,7 +146,7 @@ namespace Network_Speed.UI_MainWindow.ViewModel
 
             try
             {
-                TxtIPBefore = await GetIP();
+                TxtIPBefore = GetIP();
             }
             catch (Exception e1)
             {
@@ -135,8 +158,8 @@ namespace Network_Speed.UI_MainWindow.ViewModel
             _ = await ResetModemViaCommandLine();
 
             const long LIMIT_SECOND = 120;
-            const long DELAY_SECOND = 10;
-            var task = Task.Run(async () =>
+            const long DELAY_SECOND = 20;
+            var task = Task.Run(() =>
             {
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
@@ -151,7 +174,7 @@ namespace Network_Speed.UI_MainWindow.ViewModel
                     }
                     try
                     {
-                        temp = await GetIP();
+                        temp = GetIP();
                     }
                     catch
                     {
@@ -187,10 +210,12 @@ namespace Network_Speed.UI_MainWindow.ViewModel
             return result;
         }
 
-        public static async Task<string> GetIP()
+        public static string GetIP()
         {
-            client = new HttpClient();
-            return await client.GetStringAsync("https://api.ipify.org");
+            using (HttpClient tempClient = new HttpClient())
+            {
+                return tempClient.GetStringAsync("https://api.ipify.org").Result;
+            }
         }
 
         public static async Task<bool> ResetModemOnce()
@@ -321,12 +346,13 @@ namespace Network_Speed.UI_MainWindow.ViewModel
             log.Debug("Window is loaded");
             DisplayNetworkList(GetListInterface());
 
-            var task = Task.Run(async () =>
+            TxtIPBefore = await Task.Run(() =>
             {
                 string temp = "";
                 try
                 {
-                    temp = await GetIP();
+                    temp = GetIP();
+                    log.Info("IP: " + temp);
                 }
                 catch
                 {
@@ -334,7 +360,6 @@ namespace Network_Speed.UI_MainWindow.ViewModel
                 }
                 return temp;
             });
-            TxtIPBefore = await task;
         }
 
         public List<MyNetworkInfo> GetListInterface()
