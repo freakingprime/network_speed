@@ -102,7 +102,7 @@ namespace Network_Speed.UI_MainWindow.ViewModel
                 string temp = "";
                 try
                 {
-                    temp = MainWindowVm.GetIP();
+                    temp = GetIP();
                 }
                 catch
                 {
@@ -144,20 +144,22 @@ namespace Network_Speed.UI_MainWindow.ViewModel
             TxtIPAfter = EMPTY_STRING;
             ColorIPAfter = Brushes.Black;
 
-            oldLog.Debug("Get current IP...");
-            try
-            {
-                TxtIPBefore = await Task.Run(() =>
-                {
-                    return GetIP();
-                });
-            }
-            catch (Exception e1)
-            {
-                oldLog.Error("Cannot get IP address. " + e1.GetType().Name + ". " + (e1.Message ?? "No message"));
-                TxtIPBefore = NONE;
-            }
-            oldLog.Debug("IP before: " + TxtIPBefore);
+            //oldLog.Debug("Get current IP...");
+            //try
+            //{
+            //    TxtIPBefore = await Task.Run(() =>
+            //    {
+            //        return GetIP();
+            //    });
+            //}
+            //catch (Exception e1)
+            //{
+            //    oldLog.Error("Cannot get IP address. " + e1.GetType().Name + ". " + (e1.Message ?? "No message"));
+            //    TxtIPBefore = NONE;
+            //}
+            //oldLog.Debug("IP before: " + TxtIPBefore);
+
+            TxtIPBefore = TxtIPAfter;
 
             _ = await ResetModemViaCommandLine();
 
