@@ -10,31 +10,40 @@
         DataContextChanged="Window_DataContextChanged"
         Loaded="Window_Loaded"
         Closing="Window_Closing"
-        Title="MainWindow" Height="500" Width="450">
+        Title="MainWindow"
+        Height="500"
+        Width="450">
     <Window.DataContext>
-        <vm:MainWindowVm/>
+        <vm:MainWindowVm />
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.Resources>
             <Style TargetType="{x:Type TextBox}">
-                <Setter Property="Margin" Value="2"/>
+                <Setter Property="Margin"
+                        Value="2" />
             </Style>
             <Style TargetType="{x:Type DataGrid}">
-                <Setter Property="Margin" Value="2"/>
+                <Setter Property="Margin"
+                        Value="2" />
             </Style>
             <Style TargetType="{x:Type Button}">
-                <Setter Property="Margin" Value="2"/>
-                <Setter Property="Padding" Value="2"/>
+                <Setter Property="Margin"
+                        Value="2" />
+                <Setter Property="Padding"
+                        Value="2" />
             </Style>
         </Grid.Resources>
-        <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
+        <StackPanel Grid.Column="0"
+                    Grid.ColumnSpan="2">
             <GroupBox Header="Network Interfaces">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Button Name="BtnRefresh" Click="BtnRefresh_Click" Content="Refresh"/>
+                        <Button Name="BtnRefresh"
+                                Click="BtnRefresh_Click"
+                                Content="Refresh" />
                     </StackPanel>
                     <DataGrid x:Name="DataGridAllInterface"
                               AutoGenerateColumns="False"
@@ -45,13 +54,17 @@
                               VerticalScrollBarVisibility="Visible"
                               HorizontalScrollBarVisibility="Visible">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Binding="{Binding InterfaceName}"/>
-                            <DataGridTextColumn Header="Speed" Binding="{Binding SpeedStr}"/>
-                            <DataGridTextColumn Header="Type" Binding="{Binding NetworkType}"/>
+                            <DataGridTextColumn Header="Name"
+                                                Binding="{Binding InterfaceName}" />
+                            <DataGridTextColumn Header="Speed"
+                                                Binding="{Binding SpeedStr}" />
+                            <DataGridTextColumn Header="Type"
+                                                Binding="{Binding NetworkType}" />
                         </DataGrid.Columns>
                         <DataGrid.RowStyle>
                             <Style TargetType="{x:Type DataGridRow}">
-                                <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+                                <EventSetter Event="MouseDoubleClick"
+                                             Handler="DataGridRow_MouseDoubleClick" />
                             </Style>
                         </DataGrid.RowStyle>
                     </DataGrid>
@@ -60,31 +73,39 @@
             <GroupBox Header="Monitor network">
                 <StackPanel>
                     <DockPanel>
-                        <Button x:Name="BtnReloadInformation" Content="Default" Click="BtnReloadInformation_Click"/>
-                        <TextBox Name="TxtMonitorInterface" 
+                        <Button x:Name="BtnReloadInformation"
+                                Content="Default"
+                                Click="BtnReloadInformation_Click" />
+                        <TextBox Name="TxtMonitorInterface"
                                  MaxLines="1"
                                  IsReadOnly="True"
                                  Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
-                                 TextChanged="TxtMonitorInterface_TextChanged"/>
+                                 TextChanged="TxtMonitorInterface_TextChanged" />
                     </DockPanel>
                     <DockPanel>
-                        <Label Content="Status:"/>
-                        <TextBlock x:Name="TxtStatus" 
-                                   Text="{Binding StatusEnum,Converter={StaticResource EnumToStringConverter}}" 
+                        <Label Content="Status:" />
+                        <TextBlock x:Name="TxtStatus"
+                                   Text="{Binding StatusEnum,Converter={StaticResource EnumToStringConverter}}"
                                    FontWeight="Bold"
-                                   VerticalAlignment="Center" 
-                                   HorizontalAlignment="Left" 
-                                   Width="50">
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding StatusEnum,UpdateSourceTrigger=PropertyChanged}" Value="{x:Static vm:NetworkStatus.Gigabit}">
-                                            <Setter Property="Foreground" Value="Blue"/>
-                                            <Setter Property="Text" Value="Good"/>
+                                        <DataTrigger Binding="{Binding StatusEnum,UpdateSourceTrigger=PropertyChanged}"
+                                                     Value="{x:Static vm:NetworkStatus.SuperGigabit}">
+                                            <Setter Property="Foreground"
+                                                    Value="Blue" />
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding StatusEnum,UpdateSourceTrigger=PropertyChanged}" Value="{x:Static vm:NetworkStatus.Bad}">
-                                            <Setter Property="Foreground" Value="Red"/>
-                                            <Setter Property="Text" Value="Bad"/>
+                                        <DataTrigger Binding="{Binding StatusEnum,UpdateSourceTrigger=PropertyChanged}"
+                                                     Value="{x:Static vm:NetworkStatus.Gigabit}">
+                                            <Setter Property="Foreground"
+                                                    Value="Green" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding StatusEnum,UpdateSourceTrigger=PropertyChanged}"
+                                                     Value="{x:Static vm:NetworkStatus.Bad}">
+                                            <Setter Property="Foreground"
+                                                    Value="Red" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -98,27 +119,37 @@
                              IsReadOnly="True"
                              FontFamily="Courier New"
                              VerticalScrollBarVisibility="Visible"
-                             Height="100"/>
+                             Height="100" />
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="Reset modem">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="BtnResetModem" Click="BtnResetModem_Click" Content="Reset Modem"/>
-                        <Button x:Name="BtnClearLog" Click="BtnClearLog_Click" Content="Clear Log"/>
-                        <Button x:Name="BtnTest" Click="BtnTest_Click" Content="Test"/>
+                        <Button x:Name="BtnResetModem"
+                                Click="BtnResetModem_Click"
+                                Content="Reset Modem" />
+                        <Button x:Name="BtnClearLog"
+                                Click="BtnClearLog_Click"
+                                Content="Clear Log" />
+                        <Button x:Name="BtnTest"
+                                Click="BtnTest_Click"
+                                Content="Test" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="IP"/>
-                        <Label Content="Before: "/>
-                        <Label Name="TxtIPBefore" Content="{Binding TxtIPBefore}"/>
-                        <Label Content="After: "/>
-                        <Label Name="TxtIPAfter" Content="{Binding TxtIPAfter}" Foreground="{Binding ColorIPAfter}" FontWeight="Bold"/>
+                        <Label Content="IP" />
+                        <Label Content="Before: " />
+                        <Label Name="TxtIPBefore"
+                               Content="{Binding TxtIPBefore}" />
+                        <Label Content="After: " />
+                        <Label Name="TxtIPAfter"
+                               Content="{Binding TxtIPAfter}"
+                               Foreground="{Binding ColorIPAfter}"
+                               FontWeight="Bold" />
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
         </StackPanel>
-        <StackPanel Grid.ColumnSpan="2"/>
+        <StackPanel Grid.ColumnSpan="2" />
     </Grid>
 
 </Window>

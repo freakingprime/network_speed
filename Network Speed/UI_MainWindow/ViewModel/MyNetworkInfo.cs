@@ -10,7 +10,7 @@ namespace Network_Speed.UI_MainWindow.ViewModel
 {
     public enum NetworkStatus
     {
-        Gigabit, Bad
+        SuperGigabit, Gigabit, Bad
     }
 
     public class MyNetworkInfo : ViewModelBase
@@ -35,13 +35,18 @@ namespace Network_Speed.UI_MainWindow.ViewModel
             long speed = Adapter.Speed;
             string[] speedStep = { "bps", "Kbps", "Mbps", "Gbps" };
             int indexStep = 0;
-            while (speed >= 1000 && indexStep < speedStep.Length - 1)
+            double finalSpeed = 0;
+            while (speed >= 1000000 && indexStep < speedStep.Length - 1)
             {
                 indexStep++;
-                speed = speed / 1000;
+                speed /= 1000;
             }
-            SpeedStr = speed + " " + speedStep[indexStep];
-
+            if (speed >= 1000 && indexStep < speedStep.Length - 1)
+            {
+                indexStep++;
+                finalSpeed = speed / 1000.0;
+            }
+            SpeedStr = finalSpeed + " " + speedStep[indexStep];
             NetworkType = Adapter.NetworkInterfaceType.ToString();
         }
 
@@ -97,7 +102,11 @@ namespace Network_Speed.UI_MainWindow.ViewModel
         {
             get
             {
-                if (Speed >= 1000000000)
+                if (Speed >= 2500000000)
+                {
+                    return NetworkStatus.SuperGigabit;
+                }
+                else if (Speed >= 1000000000)
                 {
                     return NetworkStatus.Gigabit;
                 }
